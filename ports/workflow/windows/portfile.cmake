@@ -6,6 +6,8 @@ vcpkg_from_github(
     HEAD_REF windows
 )
 
+configure_file(${CURRENT_PORT_DIR}/workflow-config.cmake.in ${SOURCE_PATH}/workflow-config.cmake.in COPYONLY)
+
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     # PREFER_NINJA # Disable this option if project cannot be built with Ninja
