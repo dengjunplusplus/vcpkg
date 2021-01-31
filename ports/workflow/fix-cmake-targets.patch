@@ -1,0 +1,48 @@
+From e1d1efaf44ba68015d22e1921672f6589fd745a3 Mon Sep 17 00:00:00 2001
+From: dengjun <dengjun@sogou-inc.com>
+Date: Sun, 31 Jan 2021 20:17:46 +0800
+Subject: [PATCH] fix cmake targets
+
+---
+ CMakeLists.txt           | 14 ++++++++++++++
+ workflow-config.cmake.in |  2 ++
+ 2 files changed, 16 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f324b2b..248284b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -112,3 +112,17 @@ install(
+ 	DESTINATION "${CMAKE_INSTALL_DOCDIR}-${PROJECT_VERSION}"
+ 	COMPONENT devel
+ )
++
++install (
++	TARGETS ${CMAKE_PROJECT_NAME} EXPORT ${CMAKE_PROJECT_NAME}-targets
++    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
++)
++
++install (
++	EXPORT ${CMAKE_PROJECT_NAME}-targets
++    FILE ${CMAKE_PROJECT_NAME}-targets.cmake
++    NAMESPACE Workflow::
++    DESTINATION "${CMAKE_CONFIG_INSTALL_DIR}"
++)
+\ No newline at end of file
+diff --git a/workflow-config.cmake.in b/workflow-config.cmake.in
+index e46707e..c57fbc8 100644
+--- a/workflow-config.cmake.in
++++ b/workflow-config.cmake.in
+@@ -4,5 +4,7 @@ set(WORKFLOW_VERSION "@workflow_VERSION@")
+ set_and_check(WORKFLOW_INCLUDE_DIR "@PACKAGE_CONFIG_INC_DIR@")
+ set_and_check(WORKFLOW_LIB_DIR "@PACKAGE_CONFIG_LIB_DIR@")
+ 
++include ("${CMAKE_CURRENT_LIST_DIR}/workflow-targets.cmake")
++
+ check_required_components(workflow)
+ 
+-- 
+2.20.1.windows.1
+
