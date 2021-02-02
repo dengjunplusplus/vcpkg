@@ -24,7 +24,7 @@ index 1fdb29f..8785488 100644
 -			else if(std::tolower(lhs[i]) > std::tolower(rhs[i])) return false;
 -		}
 -		return lhs_sz < rhs_sz;
-+		return strcasecmp(lhs.c_str(), rhs.c_str()) < 1;
++		return strcasecmp(lhs.c_str(), rhs.c_str()) < 0;
  	}
  };
  
