@@ -1,34 +1,33 @@
-From e1d1efaf44ba68015d22e1921672f6589fd745a3 Mon Sep 17 00:00:00 2001
+From 802354a0912f6f440d4b78a8bc151c7924528b94 Mon Sep 17 00:00:00 2001
 From: dengjun <dengjun@sogou-inc.com>
 Date: Sun, 31 Jan 2021 20:17:46 +0800
 Subject: [PATCH] fix cmake targets
 
 ---
- CMakeLists.txt           | 14 ++++++++++++++
+ CMakeLists.txt           | 13 +++++++++++++
  workflow-config.cmake.in |  2 ++
- 2 files changed, 16 insertions(+)
+ 2 files changed, 15 insertions(+)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index f324b2b..248284b 100644
+index 0e56e05..b9c2db0 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -112,3 +112,17 @@ install(
+@@ -112,3 +112,16 @@ install(
  	DESTINATION "${CMAKE_INSTALL_DOCDIR}-${PROJECT_VERSION}"
  	COMPONENT devel
  )
 +
 +install (
 +	TARGETS ${CMAKE_PROJECT_NAME} EXPORT ${CMAKE_PROJECT_NAME}-targets
-+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
++	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 +)
 +
 +install (
 +	EXPORT ${CMAKE_PROJECT_NAME}-targets
-+    FILE ${CMAKE_PROJECT_NAME}-targets.cmake
-+    NAMESPACE Workflow::
-+    DESTINATION "${CMAKE_CONFIG_INSTALL_DIR}"
++	FILE ${CMAKE_PROJECT_NAME}-targets.cmake
++	DESTINATION "${CMAKE_CONFIG_INSTALL_DIR}"
 +)
 \ No newline at end of file
 diff --git a/workflow-config.cmake.in b/workflow-config.cmake.in
@@ -44,5 +43,5 @@ index e46707e..c57fbc8 100644
  check_required_components(workflow)
  
 -- 
-2.20.1.windows.1
+2.28.0.windows.1
 
