@@ -8,6 +8,7 @@ vcpkg_from_github(
         fix-cmake-targets.patch
         use-lib-for-lz4-and-snappy.patch
         fix-compile-error-on-win.patch
+        fix-bin-error.patch
 )
 
 

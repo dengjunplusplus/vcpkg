@@ -1,8 +1,8 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO sogou/workflow
-    REF b9c3853eef22be01a60c83c734450bbcf6b7ac7f
-    SHA512 7eb260ac0b39acc0e1d282cc481ebeff39ad83bf22a11a92c99a5c6e34e89f3e2cea8cfc6c7ba192a5143cf0587b2a8e1ec26d45cfb08f20280bb7315aa7b506
+    REF c712b1071840b88a8b9703869466b03984e4e6e6
+    SHA512 20c608cc9d0a21fdb66eda73838a9389dbdd9e73066505bd6718769e581ea004063f2cd3a7ce360cbd373f9e512a6a49eb9324c80c860dd19da4f72554c354bf
     HEAD_REF windows
     PATCHES
         fix-cmake-targets.patch
