@@ -1,0 +1,14 @@
+{
+  "name": "srpc",
+  "version-string": "",
+  "homepage": "https://github.com/sogou/srpc",
+  "description": "RPC based on Sogou C++ Workflow",
+  "dependencies": [
+    "openssl",
+    "workflow",
+    "lz4",
+    "snappy",
+    "zlib",
+    "protobuf"
+  ]
+}

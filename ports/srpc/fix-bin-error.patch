@@ -1,0 +1,43 @@
+From 2af81472aadae333abcf10fb7783535614da044b Mon Sep 17 00:00:00 2001
+From: DengJun <dengjun@sogou-inc.com>
+Date: Tue, 2 Feb 2021 14:19:03 +0800
+Subject: [PATCH] fix bin error
+
+---
+ CMakeLists.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ffd976e..22bc5fc 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -55,7 +55,7 @@ configure_package_config_file(
+ 	${PROJECT_NAME}-config.cmake.in
+ 	${PROJECT_SOURCE_DIR}/${PROJECT_NAME}-config.cmake
+ 	INSTALL_DESTINATION ${CMAKE_CONFIG_INSTALL_DIR}
+-	PATH_VARS CONFIG_INC_DIR CONFIG_LIB_DIR CONFIG_BIN_DIR
++	PATH_VARS CONFIG_INC_DIR CONFIG_LIB_DIR
+ )
+ 
+ set(CONFIG_INC_DIR ${CMAKE_INSTALL_INCLUDEDIR})
+@@ -65,7 +65,7 @@ configure_package_config_file(
+ 	${PROJECT_NAME}-config.cmake.in
+ 	${CMAKE_CONFIG_INSTALL_FILE}
+ 	INSTALL_DESTINATION ${CMAKE_CONFIG_INSTALL_DIR}
+-	PATH_VARS CONFIG_INC_DIR CONFIG_LIB_DIR CONFIG_BIN_DIR
++	PATH_VARS CONFIG_INC_DIR CONFIG_LIB_DIR
+ )
+ 
+ install(
+@@ -125,7 +125,7 @@ install (
+ 	TARGETS ${CMAKE_PROJECT_NAME} EXPORT ${CMAKE_PROJECT_NAME}-targets
+ 	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+ 	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
++	RUNTIME DESTINATION tools/srpc
+ )
+ 
+ install (
+-- 
+2.28.0.windows.1
+
