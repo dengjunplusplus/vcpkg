@@ -5,8 +5,8 @@ endif()
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO sogou/workflow
-    REF v0.9.3
-    SHA512 a687cbcef0ee807953447a95f1828dc06fb072bba9cd6cf53f71ec84fac503569759d1c96fafd8ea6de064c312915bd3fa64ed9250176904b455009f3a3b11f4
+    REF a7314767c230d5b919350719f9abe8292cfef610
+    SHA512 e83e53116770eea15e9f9660ac96b48f8d6a1f48de4d50d008d16e364d23c612f31426b2df620fa1d983d9f3c39f432e78880fc6bae4bf42f74b5be5aebd3ac7
     HEAD_REF master
     PATCHES
         fix-cmake-targets.patch
