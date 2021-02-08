@@ -29,7 +29,7 @@ else()
 	file(RENAME ${CURRENT_PACKAGES_DIR}/bin/srpc_generator ${CURRENT_PACKAGES_DIR}/tools/srpc/srpc_generator)
 endif()
 
-vcpkg_copy_tool_dependencies(${CURRENT_PACKAGES_DIR}/tools/srpc) 
+vcpkg_copy_tool_dependencies("${CURRENT_PACKAGES_DIR}/tools/srpc") 
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share")

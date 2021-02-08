@@ -1,15 +1,14 @@
-if (NOT VCPKG_TARGET_IS_MINGW)
-    vcpkg_fail_port_install(MESSAGE "${PORT} is only for workflow on Unix-like systems" ON_TARGET "Windows")
-endif()
-
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
-    REPO sogou/workflow
-    REF v0.9.3
-    SHA512 a687cbcef0ee807953447a95f1828dc06fb072bba9cd6cf53f71ec84fac503569759d1c96fafd8ea6de064c312915bd3fa64ed9250176904b455009f3a3b11f4
+    REPO sogou/srpc
+    REF bbf21b54a82f35d18b5fef19828a588684726df6
+    SHA512 8b0c8b64c45123c00cf40249ccb67ee41409e5b2a7a04d7db9ee0f558ecea4bfd9e8537b2c8d98959b1115ca799dff17fa977b12e7fe23a1b8c60b935b9d8cac
     HEAD_REF master
     PATCHES
         fix-cmake-targets.patch
+        use-lib-for-lz4-and-snappy.patch
+        fix-compile-error-on-win.patch
+        fix-bin-error.patch
 )
 
 vcpkg_configure_cmake(
@@ -22,7 +21,18 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 
+file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/tools/srpc)
+if (VCPKG_TARGET_IS_WINDOWS)
+	file(RENAME ${CURRENT_PACKAGES_DIR}/bin/srpc_generator.exe ${CURRENT_PACKAGES_DIR}/tools/srpc/srpc_generator.exe)
+else()
+	file(RENAME ${CURRENT_PACKAGES_DIR}/bin/srpc_generator ${CURRENT_PACKAGES_DIR}/tools/srpc/srpc_generator)
+endif()
+
+vcpkg_copy_tool_dependencies(${CURRENT_PACKAGES_DIR}/tools/srpc) 
+
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share")
+file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/bin")
+file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/bin")
 
 vcpkg_fixup_cmake_targets(CONFIG_PATH lib/cmake TARGET_PATH share)
