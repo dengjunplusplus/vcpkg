@@ -29,11 +29,45 @@
 #
 # 	See additional helpful variables in /docs/maintainers/vcpkg_common_definitions.md
 
-if(VCPKG_TARGET_IS_WINDOWS AND NOT VCPKG_TARGET_IS_MINGW)
-    include("${CMAKE_CURRENT_LIST_DIR}/windows/portfile.cmake")
+vcpkg_from_github(
+    OUT_SOURCE_PATH SOURCE_PATH
+    REPO sogou/srpc
+    REF 16f2114157065fcd087a7e24193d4ac5710208b8
+    SHA512 382c8ef955086554f2b7c26b640a88fb33df63c139a1e028f290bb581c21be015f1ae776c0fa437b2766d587af01dd0044a1585c38fff367c8d1a92100cd9a69
+    HEAD_REF master
+    PATCHES
+        use-lib-for-lz4-and-snappy.patch
+        fix-bin-error.patch
+)
+
+
+vcpkg_configure_cmake(
+    SOURCE_PATH ${SOURCE_PATH}
+    PREFER_NINJA # Disable this option if project cannot be built with Ninja
+    # OPTIONS -DUSE_THIS_IN_ALL_BUILDS=1 -DUSE_THIS_TOO=2
+    # OPTIONS_RELEASE -DOPTIMIZE=1
+    # OPTIONS_DEBUG -DDEBUGGABLE=1
+)
+
+vcpkg_install_cmake()
+
+file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/tools/srpc)
+if (VCPKG_TARGET_IS_WINDOWS)
+	file(RENAME ${CURRENT_PACKAGES_DIR}/bin/srpc_generator.exe ${CURRENT_PACKAGES_DIR}/tools/srpc/srpc_generator.exe)
 else()
-    include("${CMAKE_CURRENT_LIST_DIR}/unix/portfile.cmake")
+	file(RENAME ${CURRENT_PACKAGES_DIR}/bin/srpc_generator ${CURRENT_PACKAGES_DIR}/tools/srpc/srpc_generator)
 endif()
+
+vcpkg_copy_tool_dependencies("${CURRENT_PACKAGES_DIR}/tools/srpc") 
+
+file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
+file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share")
+file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/bin")
+file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/bin")
+
+vcpkg_fixup_cmake_targets(CONFIG_PATH lib/cmake TARGET_PATH share)
+
+vcpkg_copy_pdbs()
 
 # # Handle copyright
 file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/srpc RENAME copyright)
