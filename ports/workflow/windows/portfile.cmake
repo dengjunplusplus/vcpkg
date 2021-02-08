@@ -1,11 +1,10 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO sogou/workflow
-    REF c712b1071840b88a8b9703869466b03984e4e6e6
-    SHA512 20c608cc9d0a21fdb66eda73838a9389dbdd9e73066505bd6718769e581ea004063f2cd3a7ce360cbd373f9e512a6a49eb9324c80c860dd19da4f72554c354bf
+    REF eb0ef062cb4be64f3a152c740ed3d32e468c13fe
+    SHA512 0dafe5637c78bfa8d415ef54d9ac91f6a6f525a5876ec54c321a533d05b010c1f94829107808348bbf2ffe58914547930abf2fc4b0b07c2990a55c44bb9fd2e3
     HEAD_REF windows
     PATCHES
-        fix-cmake-targets.patch
 )
 
 # configure_file(${CURRENT_PORT_DIR}/workflow-config.cmake.in ${SOURCE_PATH}/workflow-config.cmake.in COPYONLY)
