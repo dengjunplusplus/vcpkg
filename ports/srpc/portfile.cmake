@@ -16,19 +16,13 @@ vcpkg_configure_cmake(
 
 vcpkg_install_cmake()
 
-file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/tools/srpc)
-if (VCPKG_TARGET_IS_WINDOWS)
-	file(RENAME ${CURRENT_PACKAGES_DIR}/bin/srpc_generator.exe ${CURRENT_PACKAGES_DIR}/tools/srpc/srpc_generator.exe)
-else()
-	file(RENAME ${CURRENT_PACKAGES_DIR}/bin/srpc_generator ${CURRENT_PACKAGES_DIR}/tools/srpc/srpc_generator)
-endif()
-
-vcpkg_copy_tools("${CURRENT_PACKAGES_DIR}/tools/srpc") 
+vcpkg_copy_tools(
+    TOOL_NAMES srpc_generator
+    AUTO_CLEAN
+)
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/share")
-file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/bin")
-file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/bin")
 
 vcpkg_fixup_cmake_targets(CONFIG_PATH lib/cmake TARGET_PATH share)
 
